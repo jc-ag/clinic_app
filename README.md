@@ -1,63 +1,84 @@
+# Online Clinic Management System
+
+Online Clinic Management System (OCMS) is a web application that allows you to manage your clinic. This application offers you insight on your clinic activity and keeps historical records of every single patient, all his visits and related prescriptions. The patients info you can store include tobacco usage, alcohol intake, surgical and obstetric history and genetic diseases. It’s easy to use, and makes you become more organized and accordingly, more productive. 
+
+License: MIT License
+
+Requires PHP and MySQL
+
 # Docker: PHP & MySQL
 
-Instala rápidamente un ambiente de desarrollo local para trabajar con [PHP](https://www.php.net/) y [MySQL](https://www.mysql.com/) utilizando [Docker](https://www.docker.com). 
+This is a docker installion of OCMS. The original files can be downloaded from this [Link](https://bigprof.com/appgini/applications/online-clinic-management-system)
 
-Utilizar *Docker* es sencillo, pero existen tantas imágenes, versiones y formas para crear los contenedores que hacen tediosa esta tarea. Este proyecto ofrece una instalación rápida, con versiones estandar y con la mínima cantidad de modificaciones a las imágenes de Docker. Viene configurado con  `PHP 7.3` y `MySQL 5.7`.
+The objective of this repo is to have available an easy way to deploy the app for testing purposes (test automation practice for example).
 
-## Requerimientos
+This project offers an easy installation with standard versions and the minimal amount of mods of the docker images. It comes with `PHP 7.3` y `MySQL 5.7`.
+
+## Requirements
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-## Configurar el ambiente de desarrollo
+## Environment configuration
 
-Puedes utilizar la configuración por defecto, pero en ocasiones es recomendable modificar la configuración para que sea igual al servidor de producción. La configuración se ubica en el archivo `.env` con las siguientes opciones:
+You could use the default configuration that comes within the repo and the app will work, however, sometimes it is recommended the modification of the configuration depending on the needs. To do so, please go to the `.env` and edit the following options:
 
-* `PHP_VERSION` versión de PHP ([Versiones disponibles de PHP](https://github.com/docker-library/docs/blob/master/php/README.md#supported-tags-and-respective-dockerfile-links)).
-* `PHP_PORT` puerto para servidor web.
-* `MYSQL_VERSION` versión de MySQL([Versiones disponibles de MySQL](https://hub.docker.com/_/mysql)).
-* `MYSQL_USER` nombre de usuario para conectarse a MySQL.
-* `MYSQL_PASSWORD` clave de acceso para conectarse a MySQL.
-* `MYSQL_DATABASE` nombre de la base de datos que se crea por defecto.
+* `PHP_VERSION` PHP version ([Available versions of PHP](https://github.com/docker-library/docs/blob/master/php/README.md#supported-tags-and-respective-dockerfile-links)).
+* `PHP_PORT` Web Server Port.
+* `MYSQL_VERSION` MySQL version([available versions of MySQL](https://hub.docker.com/_/mysql)).
+* `MYSQL_USER` username to connect to MySQL.
+* `MYSQL_PASSWORD` password to connect to MySQL.
+* `MYSQL_DATABASE` database name created by default when the docker compose command is run.
 
-## Instalar el ambiente de desarrollo
+## How to install the environment
 
-La instalación se hace en línea de comandos:
+It is done through the command line:
 
 ```zsh
 docker-compose up -d
 ```
-Puedes vaidar que se ha instalado correctamente accediendo a: [http://localhost/info.php](http://localhost/info.php)
 
-## Comandos disponibles
+You can verify the installation is correct by navigating to [http://localhost/info.php](http://localhost/info.php)
 
-Una vez instalado, se pueden utilizar los siguiente comandos:
+## Available commands
+
+Once installed, you could use the following commands:
 
 ```zsh
-docker-compose start    # Iniciar el ambiente de desarrollo
-docker-compose stop     # Detener el ambiente de desarrollo
-docker-compose down     # Detener y eliminar el ambiente de desarrollo.
+docker-compose start    # Start the app.
+docker-compose stop     # Stop the app.
+docker-compose down     # Stop and delete the app
 ```
 
-## Estructura de Archivos
+## Filesystem Structure
 
-* `/docker/` contiene los archivos de configuración de Docker.
-* `/www/` carpeta para los archivos PHP del proyecto.
 
-## Accesos
+* `/docker/` contains the docker configuration files.
+* `/www/clinic` contains the OCMS source files.
+
+## Access
 
 ### Web
 
-* http://localhost/
+* Once the system is up, navigate to http://localhost/clinic
 
-### Base de datos
+### Database
 
-Existen dos dominios para conectarse a base de datos.
+There's two domains to connect to the DB
 
-* `mysql`: para conexión desde los archivos PHP.
-* `localhost`: para conexiones externas al contenedor.
+* `mysql`: to connect from PHP files. This is also used in the configuration file as the DB Server of the OCMS app.
+* `localhost`: for external connections to the container.
 
-Las credenciales por defecto para la conexión son:
+Default credentials for the DB connections are:
 
-| Usuario | Clave | Base de datos |
+| User | Password | Database |
 |:---:|:---:|:---:|
-| dbuser | dbpass | dbname |
+| clinic | clinic | clinic |
+
+Default credentials to access OCMS:
+
+| User | Password |
+|:---:|:---:|
+| admin | admin |
+
+
+Credits: The PHP and MySQL base docker project required to run the OCMS app was taken from this [repo](https://github.com/kodetop/docker-php-mysql).
