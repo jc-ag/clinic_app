@@ -2,6 +2,7 @@ version: '3'
 
 services:
   mysql:
+    platform: linux/x86_64
     build:
       context: ./docker/mysql
       args:
@@ -13,7 +14,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      - "${MYSQL_PORT}:3306"
     restart: always
 
   php:
@@ -28,3 +29,13 @@ services:
       - ./www:/var/www/html
     links:
       - mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: ${MYSQL_PORT}
+    ports:
+      - "${MY_ADMIN_PORT}:80"
